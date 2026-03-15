@@ -7,6 +7,33 @@ const originsDatalist = document.getElementById("origins");
 
 const model = JSON.parse(modelElement.textContent);
 
+function currentRouteSlug() {
+  const parts = window.location.pathname.split("/").filter(Boolean);
+  if (parts.length === 0) return "";
+  const last = parts[parts.length - 1];
+  if (last.toLowerCase() === "index.html") return "";
+  return last;
+}
+
+function redirectRouteToJson() {
+  const slug = currentRouteSlug();
+  if (!slug) return;
+
+  if (slug === "all") {
+    window.location.replace("./data/all.json");
+    return;
+  }
+
+  const decodedSlug = decodeURIComponent(slug);
+  const pack = model.packs.find((entry) => entry.encodedId === slug || entry.id === decodedSlug);
+
+  if (pack) {
+    window.location.replace("./data/" + pack.encodedId + ".json");
+  }
+}
+
+redirectRouteToJson();
+
 originsDatalist.innerHTML = model.origins
   .map((origin) => '<option value="' + origin.replaceAll('"', '&quot;') + '"></option>')
   .join("");

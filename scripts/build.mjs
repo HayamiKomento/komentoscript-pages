@@ -120,7 +120,7 @@ function rootPage(model, rootTemplate, routeBase) {
     PAGE_TITLE: "KomentoScript Pages",
     CSS_PATH: `${routeBase}/assets/root.css`,
     JS_PATH: `${routeBase}/assets/root.js`,
-    ALL_LINK: `${routeBase}/data/all.json`,
+    ALL_LINK: `${routeBase}/all`,
     MODEL_JSON: safeJsonForScript(model)
   });
 }
@@ -247,7 +247,7 @@ async function main() {
         id: pack.id,
         encodedId,
         name: pack.name || pack.id,
-        route: `./data/${encodedId}.json`,
+        route: `./${encodedId}`,
         source: pack.__file,
         targetCount: Array.isArray(pack.targets) ? pack.targets.length : 0,
         origins,
@@ -268,10 +268,13 @@ async function main() {
 
   await fs.writeFile(path.join(DIST_DIR, "index.html"), rootPage(homeModel, rootTemplate, "."), "utf8");
   await fs.writeFile(path.join(DIST_DIR, "data", "all.json"), JSON.stringify(allPack, null, 2), "utf8");
+  await fs.writeFile(path.join(DIST_DIR, "all"), JSON.stringify(allPack, null, 2), "utf8");
 
   for (const pack of sortedPacks) {
     const encodedId = encodeURIComponent(pack.id);
-    await fs.writeFile(path.join(DIST_DIR, "data", `${encodedId}.json`), JSON.stringify(pack, null, 2), "utf8");
+    const packJson = JSON.stringify(pack, null, 2);
+    await fs.writeFile(path.join(DIST_DIR, "data", `${encodedId}.json`), packJson, "utf8");
+    await fs.writeFile(path.join(DIST_DIR, encodedId), packJson, "utf8");
   }
 
   await fs.writeFile(path.join(DIST_DIR, "404.html"), rootPage(homeModel, rootTemplate, "."), "utf8");
