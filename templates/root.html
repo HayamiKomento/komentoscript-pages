@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{PAGE_TITLE}}</title>
+  <link rel="stylesheet" href="{{CSS_PATH}}">
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <h1>KomentoScript Pages</h1>
+      <p>Generated from files in <strong>sites/</strong>. Use search or origin filter to find a pack quickly.</p>
+      <div class="actions">
+        <a class="btn primary" href="{{ALL_LINK}}">Open merged JSON</a>
+      </div>
+    </section>
+
+    <section class="filters">
+      <div class="field">
+        <label for="searchPack">Search by ID or name</label>
+        <input id="searchPack" type="search" placeholder="e.g. crunchyroll, official" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="searchOrigin">Filter by origin (searchable)</label>
+        <input id="searchOrigin" type="search" placeholder="e.g. https://www.crunchyroll.com" list="origins" autocomplete="off">
+      </div>
+      <datalist id="origins"></datalist>
+      <div class="hint" id="resultHint"></div>
+    </section>
+
+    <section id="cards" class="grid"></section>
+
+    <footer class="site-footer">
+      Built for Hayami Komento.
+      <a href="https://hayami.moe" target="_blank" rel="noopener noreferrer">hayami.moe</a>
+    </footer>
+  </main>
+
+  <script id="model" type="application/json">{{MODEL_JSON}}</script>
+  <script src="{{JS_PATH}}"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "komentoscript-pages",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Build static KomentoScript pages from sites/*.json for Cloudflare Pages, GitHub Pages, and Netlify.",
+  "scripts": {
+    "build": "node ./scripts/build.mjs",
+    "clean": "node ./scripts/build.mjs --clean",
+    "dev": "npm run build"
+  },
+  "dependencies": {
+    "ajv": "^8.18.0",
+    "ajv-formats": "^3.0.1"
+  }
+}

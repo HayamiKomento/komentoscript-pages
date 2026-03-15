@@ -1,0 +1,174 @@
+:root {
+  --bg: #0e1013;
+  --panel: #171b21;
+  --panel-2: #1d232c;
+  --line: #2a3441;
+  --text: #e7edf5;
+  --muted: #a7b2c0;
+  --accent: #66a8ff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.wrap {
+  width: min(980px, 94vw);
+  margin: 1.25rem auto 2rem;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.hero,
+.filters,
+.card,
+.empty {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.85rem;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.hero p {
+  margin: 0.45rem 0 0;
+  color: var(--muted);
+}
+
+.actions {
+  margin-top: 0.7rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn {
+  text-decoration: none;
+  color: var(--text);
+  border: 1px solid var(--line);
+  background: var(--panel-2);
+  border-radius: 8px;
+  padding: 0.42rem 0.62rem;
+  font-size: 0.9rem;
+}
+
+.btn.primary {
+  border-color: #3d79ca;
+  background: #204f91;
+}
+
+.filters {
+  display: grid;
+  gap: 0.6rem;
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
+}
+
+.field {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.field label {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.field input {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #12171d;
+  color: var(--text);
+  padding: 0.48rem 0.56rem;
+}
+
+.hint {
+  grid-column: 1 / -1;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.grid {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.card h2 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.card h2 a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.badge-row,
+.origin-list {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.badge,
+.origin {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #131820;
+  padding: 0.14rem 0.45rem;
+  font-size: 0.78rem;
+}
+
+.origin {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.origin img {
+  width: 14px;
+  height: 14px;
+}
+
+.origin span {
+  max-width: 360px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.empty {
+  text-align: center;
+  color: var(--muted);
+}
+
+.site-footer {
+  border-top: 1px solid var(--line);
+  margin-top: 0.25rem;
+  padding-top: 0.7rem;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.site-footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.site-footer a:hover,
+.site-footer a:focus-visible {
+  text-decoration: underline;
+}
+
+@media (max-width: 740px) {
+  .filters {
+    grid-template-columns: 1fr;
+  }
+}

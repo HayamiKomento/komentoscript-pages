@@ -1,0 +1,186 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hayami.moe/schemas/komentoscript-pack.schema.json",
+  "title": "KomentoScript Pack",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["komentoVersion", "id", "targets"],
+  "properties": {
+    "komentoVersion": { "type": "string", "minLength": 1 },
+    "id": { "type": "string", "minLength": 1 },
+    "name": { "type": "string" },
+    "updatedAt": { "type": "string" },
+    "appliesTo": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "profiles": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["enabledTargets"],
+        "properties": {
+          "enabledTargets": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    },
+    "targets": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/target" }
+    }
+  },
+  "$defs": {
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["targetId", "match", "extract"],
+      "properties": {
+        "targetId": { "type": "string", "minLength": 1 },
+        "priority": { "type": "number" },
+        "extends": { "type": "string", "minLength": 1 },
+        "mergeMode": { "type": "string", "enum": ["replace", "deep"] },
+        "match": { "$ref": "#/$defs/match" },
+        "extract": { "$ref": "#/$defs/extract" },
+        "placement": { "$ref": "#/$defs/placement" },
+        "mapping": { "type": "object" }
+      }
+    },
+    "match": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["origins"],
+      "properties": {
+        "origins": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "pathGlobs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "excludePathGlobs": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "extract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["animeTitle", "episodeNumber"],
+      "properties": {
+        "animeTitle": { "$ref": "#/$defs/extractField" },
+        "episodeNumber": { "$ref": "#/$defs/extractField" },
+        "episodeReleaseDate": { "$ref": "#/$defs/extractField" },
+        "anilistId": { "$ref": "#/$defs/extractField" },
+        "malId": { "$ref": "#/$defs/extractField" }
+      }
+    },
+    "extractField": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "selector": { "type": "string" },
+        "xPath": { "type": "string" },
+        "attr": { "type": "string" },
+        "required": { "type": "boolean" },
+        "transforms": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "pipeline": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/pipelineStep" }
+        }
+      }
+    },
+    "pipelineStep": {
+      "type": "array",
+      "minItems": 1,
+      "items": true
+    },
+    "placement": {
+      "oneOf": [
+        { "$ref": "#/$defs/placementSingle" },
+        { "$ref": "#/$defs/placementMap" }
+      ]
+    },
+    "placementSingle": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "display": {
+          "type": "string",
+          "enum": ["below", "insert", "replace", "popup", "icon"]
+        },
+        "mountSelector": { "type": "string" },
+        "anchorSelector": { "type": "string" },
+        "mountXPath": { "type": "string" },
+        "anchorXPath": { "type": "string" },
+        "sidePadding": { "type": "number" },
+        "fallback": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "display": {
+              "type": "string",
+              "enum": ["below", "insert", "replace", "popup", "icon"]
+            },
+            "mountSelector": { "type": "string" }
+          }
+        }
+      }
+    },
+    "placementModeEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "default": { "type": "boolean" },
+        "mountSelector": { "type": "string" },
+        "anchorSelector": { "type": "string" },
+        "mountXPath": { "type": "string" },
+        "anchorXPath": { "type": "string" },
+        "sidePadding": { "type": "number" },
+        "fallback": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "display": {
+              "type": "string",
+              "enum": ["below", "insert", "replace", "popup", "icon"]
+            },
+            "mountSelector": { "type": "string" }
+          }
+        }
+      }
+    },
+    "placementMap": {
+      "type": "object",
+      "additionalProperties": false,
+      "anyOf": [
+        { "required": ["below"] },
+        { "required": ["insert"] },
+        { "required": ["replace"] },
+        { "required": ["popup"] },
+        { "required": ["icon"] }
+      ],
+      "properties": {
+        "below": { "$ref": "#/$defs/placementModeEntry" },
+        "insert": { "$ref": "#/$defs/placementModeEntry" },
+        "replace": { "$ref": "#/$defs/placementModeEntry" },
+        "popup": { "$ref": "#/$defs/placementModeEntry" },
+        "icon": { "$ref": "#/$defs/placementModeEntry" }
+      }
+    }
+  }
+}

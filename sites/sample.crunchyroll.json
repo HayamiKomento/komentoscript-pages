@@ -1,0 +1,33 @@
+{
+  "komentoVersion": "0.1",
+  "id": "crunchyroll-watch",
+  "name": "Crunchyroll Watch",
+  "updatedAt": "2026-03-14T00:00:00Z",
+  "targets": [
+    {
+      "targetId": "crunchyroll.watch",
+      "match": {
+        "origins": ["https://www.crunchyroll.com"],
+        "pathGlobs": ["/*watch*", "/*episode*"]
+      },
+      "extract": {
+        "animeTitle": {
+          "selector": "h1",
+          "attr": "text",
+          "required": true,
+          "transforms": ["trim"]
+        },
+        "episodeNumber": {
+          "pipeline": [["querySelector", "h1"], ["text"], ["regex", "(\\d+)"], ["number"]],
+          "required": true
+        }
+      },
+      "placement": {
+        "display": "below",
+        "anchorSelector": "main",
+        "mountSelector": "main",
+        "sidePadding": 24
+      }
+    }
+  ]
+}
