@@ -128,6 +128,9 @@
         "mountXPath": { "type": "string" },
         "anchorXPath": { "type": "string" },
         "sidePadding": { "type": "number" },
+        "iconDisplayKind": { "type": "string", "enum": ["text", "icon"] },
+        "iconDisplayAction": { "type": "string", "enum": ["popup", "replace"] },
+        "iconDisplayText": { "type": "string" },
         "fallback": {
           "type": "object",
           "additionalProperties": false,
@@ -151,6 +154,9 @@
         "mountXPath": { "type": "string" },
         "anchorXPath": { "type": "string" },
         "sidePadding": { "type": "number" },
+        "iconDisplayKind": { "type": "string", "enum": ["text", "icon"] },
+        "iconDisplayAction": { "type": "string", "enum": ["popup", "replace"] },
+        "iconDisplayText": { "type": "string" },
         "fallback": {
           "type": "object",
           "additionalProperties": false,

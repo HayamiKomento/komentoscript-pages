@@ -1,0 +1,31 @@
+{
+  "komentoVersion": "0.1",
+  "id": "example-placement-map",
+  "targets": [
+    {
+      "targetId": "example.map",
+      "match": {
+        "origins": ["https://example.com"]
+      },
+      "extract": {
+        "animeTitle": { "selector": "h1", "attr": "text" },
+        "episodeNumber": { "selector": ".episode", "attr": "text" }
+      },
+      "placement": {
+        "below": {
+          "default": true,
+          "mountSelector": "main",
+          "anchorSelector": "main",
+          "sidePadding": 24
+        },
+        "icon": {
+          "mountSelector": "#player-controls",
+          "iconDisplayKind": "text",
+          "iconDisplayAction": "popup",
+          "iconDisplayText": "Discuss"
+        },
+        "popup": {}
+      }
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "komentoVersion": "0.1",
+  "id": "example-profiles",
+  "profiles": {
+    "default": {
+      "enabledTargets": ["example.watch.stable"]
+    },
+    "experimental": {
+      "enabledTargets": ["example.watch.stable", "example.watch.new-layout"]
+    }
+  },
+  "targets": [
+    {
+      "targetId": "example.watch.stable",
+      "match": {
+        "origins": ["https://example.com"],
+        "pathGlobs": ["/watch/*"]
+      },
+      "extract": {
+        "animeTitle": { "selector": "h1.title", "attr": "text" },
+        "episodeNumber": { "selector": ".episode", "attr": "text" }
+      },
+      "placement": {
+        "display": "below",
+        "mountSelector": "main"
+      }
+    },
+    {
+      "targetId": "example.watch.new-layout",
+      "match": {
+        "origins": ["https://example.com"],
+        "pathGlobs": ["/watch/*"]
+      },
+      "extract": {
+        "animeTitle": { "selector": ".new-title", "attr": "text" },
+        "episodeNumber": {
+          "pipeline": [["querySelector", ".new-episode"], ["text"], ["regex", "(\\d+)"], ["number"]]
+        }
+      },
+      "placement": {
+        "display": "icon",
+        "mountSelector": "#controls",
+        "iconDisplayKind": "text",
+        "iconDisplayAction": "popup",
+        "iconDisplayText": "Discuss"
+      }
+    }
+  ]
+}

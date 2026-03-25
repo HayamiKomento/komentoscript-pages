@@ -1,0 +1,21 @@
+{
+  "komentoVersion": "0.1",
+  "id": "example-minimal",
+  "targets": [
+    {
+      "targetId": "example.watch",
+      "match": {
+        "origins": ["https://example.com"],
+        "pathGlobs": ["/watch/*"]
+      },
+      "extract": {
+        "animeTitle": { "selector": "h1.title", "attr": "text" },
+        "episodeNumber": { "selector": ".episode", "attr": "text" }
+      },
+      "placement": {
+        "display": "below",
+        "mountSelector": "main"
+      }
+    }
+  ]
+}

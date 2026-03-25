@@ -1,0 +1,24 @@
+{
+  "komentoVersion": "0.1",
+  "id": "example-icon-text-popup",
+  "targets": [
+    {
+      "targetId": "example.icon.text",
+      "match": {
+        "origins": ["https://example.com"],
+        "pathGlobs": ["/watch/*"]
+      },
+      "extract": {
+        "animeTitle": { "selector": "h1.title", "attr": "text" },
+        "episodeNumber": { "selector": ".episode", "attr": "text" }
+      },
+      "placement": {
+        "display": "icon",
+        "mountSelector": "#player-controls",
+        "iconDisplayKind": "text",
+        "iconDisplayAction": "popup",
+        "iconDisplayText": "Open Hayami"
+      }
+    }
+  ]
+}

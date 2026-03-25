@@ -1,0 +1,26 @@
+{
+  "komentoVersion": "0.1",
+  "id": "example-icon-icon-replace",
+  "targets": [
+    {
+      "targetId": "example.icon.replace",
+      "match": {
+        "origins": ["https://example.com"],
+        "pathGlobs": ["/episode/*"]
+      },
+      "extract": {
+        "animeTitle": { "selector": "h1", "attr": "text" },
+        "episodeNumber": {
+          "pipeline": [["querySelector", ".ep"], ["text"], ["regex", "(\\d+)"], ["number"]]
+        }
+      },
+      "placement": {
+        "display": "icon",
+        "anchorSelector": "#comments-slot",
+        "mountSelector": "#comments-slot",
+        "iconDisplayKind": "icon",
+        "iconDisplayAction": "replace"
+      }
+    }
+  ]
+}
